@@ -1,0 +1,6 @@
+{
+    "CHANNEL_ACCESS_TOKEN":"<CHANNEL_ACCESS_TOKEN>",
+    "LINE_CHANNEL_ID":"<LINE_CHANNEL_ID>",
+    "LINE_CHANNEL_SECRET":"<LINE_CHANNEL_SECRET>",
+    "REDIRECT_URL":"https://<DOMAIN>/line/linelogin_success/"
+}

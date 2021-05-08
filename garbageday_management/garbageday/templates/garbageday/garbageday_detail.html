@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<link rel='stylesheet' type="text/css" href="{% static 'garbageday/css/style.css' %}">
+<p><span class="margin">ごみの種類:</span>{{ garbageday_data.get_garbage_type_display }}</p>
+<hr>
+<p><span class="margin">更新日:</span>{{ garbageday_data.updated_at }}</p>
+<hr>
+<p><span class="margin">週1:</span>&emsp;&emsp;&emsp;{{ garbageday_data.get_week1_display }}</p>
+{% if garbageday_data.get_week2_display is not None %}
+<p><span class="margin">週2:</span>&emsp;&emsp;&emsp;{{ garbageday_data.get_week2_display }}</p>
+{% endif %}
+<p><span class="margin">曜日1:</span>&emsp;&emsp;{{ garbageday_data.get_day_of_week1_display }}</p>
+{% if garbageday_data.get_day_of_week2_display is not None %}
+<p><span class="margin">曜日2:</span>&emsp;&emsp;{{ garbageday_data.get_day_of_week2_display }}</p>
+{% endif %}
+<hr>
+{% if garbageday_data.manage_alarm %}
+  <p><span class="margin">アラーム:</span>&emsp;ON</p>
+  <p><span class="margin">設定日:</span>&emsp;&emsp; {{ garbageday_data.get_alarm_day_display }}</p>
+  <p><span class="margin">通知時間:</span>&emsp;{{ garbageday_data.get_alarm_time_display }}</p>
+{% else %}
+  <p><span class="margin">アラーム:</span>&emsp;OFF</p>
+{% endif %} 
+
+
+<div class="d-flex mb-5">
+    <a class="btn btn-warning mr-2" href="{% url 'garbageday_edit' display_name garbageday_data.id %}">編集</a>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#modal1" style="cursor: pointer;">
+      削除
+    </button>
+</div>
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="label1" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="label1">ごみの日の削除</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        削除してもよろしいですか？
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">閉じる</button>
+        <form method="post">
+          {% csrf_token %}
+          <button class="btn btn-danger" type="submit">削除</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <link rel='stylesheet' type="text/css" href="{% static 'mycalendar/css/style.css' %}">
+    
+    <a href="{% url 'mycalendar' month_previous.year month_previous.month %}">前月</a>
+    {{ month_current | date:"Y年m月" }}
+    <a href="{% url 'mycalendar' month_next.year month_next.month %}">次月</a>
+
+    <table class="table" id="clickTarget">
+        <thead>
+        <tr>
+            {% for w in week_names %}
+                <th>{{ w }}</th>
+            {% endfor %}
+        </tr>
+        </thead>
+        <tbody>
+
+            {% for week_day_schedles in month_day_schedules %}
+                <tr>
+                    {% for day, schedules in week_day_schedles.items %}
+                        {% if now == day %}
+                            <!---class="table-success、今日の日付セルの背景色を赤色に-->
+                            <td id="today" class="table-success">
+                        {% elif  not month_current.month == day.month %}
+                                <td class="is-disabled">
+                        {% else %}
+                            <td id="all_day" class = "all">
+                        {% endif %}
+                        {{ day.day }}<br><br>
+                        {% for schedule in schedules %} 
+                            {{ schedule.get_garbage_type_display }}<br>
+                            {% if schedule.manage_alarm %}
+                                <div id='id_alarmtime' hidden>通知時間:{{ schedule.get_alarm_day_display}}の{{ schedule.get_alarm_time_display }}<br></div>
+                            {% endif %}
+                        {% endfor %}
+                        
+                        </td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <input type="hidden" id="year_month" name="year_month" value="{{ month_current  | date:'Y/m' }}">
+    <div class="box4">
+        <p id="noData"></p>
+        <p id="clickDay"></p>
+        <p id="clickType"></p>
+        <p id="clickTime"></p>
+    </div>
+    <script type="text/javascript" src="{% static 'mycalendar/js/onclick.js' %}"></script>
+{% endblock %}

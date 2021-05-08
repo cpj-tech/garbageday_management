@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% load static %}
+{% block content %}
+
+{% if messages %}
+	<ul class="messages_ul">
+		{% for message in messages %}
+            <li class="alert{% if message.tags %} alert-{{ message.tags }}{% endif %} alert-dismissible" style="list-style: none;" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{{ message }}
+            </li>
+		{% endfor %}
+	</ul>
+{% endif %}
+
+{% for garbageday in garbageday_data %}
+<div class="list-group">
+    <a href="{% url 'garbageday_detail' display_name garbageday.id %}" class="list-group-item list-group-item-action" style="margin-top: 10px;">
+        <div class="d-flex w-100 justify-content-between">
+        <h5 class="mb-1">{{ garbageday.get_garbage_type_display }}</h5>
+        <small>アラーム: {% if garbageday.manage_alarm %}<span class="badge badge-info">ON</span>{% else %}<span class="badge badge-light">OFF</span>{% endif %}</small>
+        </div>
+    </a>
+</div>        
+{% endfor %}
+
+
+{% endblock %}

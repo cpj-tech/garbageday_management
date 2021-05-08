@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% load static %}
+{% load widget_tweaks %}
+{% block content %}
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    {% if messages %}
+	<ul class="messages_ul">
+		{% for message in messages %}
+            <li class="alert{% if message.tags %} alert-danger{% endif %} alert-dismissible" style="list-style: none;" role="alert">
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>{{ message }}
+            </li>
+		{% endfor %}
+	</ul>
+{% endif %}
+    <form method="POST">
+        {% csrf_token %}
+        <div class="form-group">
+            <div class="formpost">
+                ごみの種類： {% render_field form.garbage_type class="form-control" %}
+            </div>
+            <div class="formpost">
+                週1： {% render_field form.week1 class="form-control" %}
+            </div>
+            <div class="formpost">
+                週2: {% render_field form.week2 class="form-control" %}
+            </div>
+            <div class="formpost">
+                曜日1: {% render_field form.day_of_week1 class="form-control" %}
+            </div>
+            <div class="formpost">
+                曜日2: {% render_field form.day_of_week2 class="form-control" %} 
+            </div>
+            <div class="formpost">
+                アラーム ON/OFF: {% render_field form.manage_alarm class="form-control" %}
+            </div>
+            <div class="formpost" id="set-alarm">
+                設定日: {% render_field form.alarm_day class="form-control" %}
+            </div>
+            <div class="formpost">
+                通知時間: {% render_field form.alarm_time class="form-control" %}
+            </div>
+            <button class="btn btn-warning" type="submit">登録</button>
+        </div>
+    </form>
+    <script type="text/javascript" src="{% static 'garbageday/js/form_control.js' %}"></script>
+{% endblock %}
+

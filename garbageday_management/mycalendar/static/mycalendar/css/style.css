@@ -1,0 +1,60 @@
+h2{
+    position: relative;
+    padding: 5rem;
+    text-align: center;
+}
+
+table {
+    height: 100px;
+    /* 表と列の幅は table 要素と col 要素の幅によって、または最初の行のセルの幅によって設定され */
+    table-layout:fixed;
+}
+td.table-success{
+    height: 70px;
+    /* 領域から溢れたデータは表示しない */
+    overflow: hidden;
+    /* ソース中の改行や余白を無視する */
+    white-space: nowrap;
+}
+/* データセルのstyleを設定 */
+td.all {
+     height: 70px;
+    /* 領域から溢れたデータは表示しない */
+    overflow: hidden;
+    /* ソース中の改行や余白を無視する */
+    white-space: nowrap;
+}
+
+ /* --- セルにカーソルが乗ったとき --------------- */
+table td:hover {
+    background    : #ff7f50;           /* 背景色    */
+    color         : #ffffff;           /* 文字色    */
+  }
+
+td:first-child {
+    color: red;
+}
+
+td:last-child {
+    color: royalblue;
+}
+td.is-disabled {
+    color: #ccc;
+    height: 70px;
+    /* 領域から溢れたデータは表示しない */
+    overflow: hidden;
+    /* ソース中の改行や余白を無視する */
+    white-space: nowrap;
+}
+.box4{
+    padding: 8px 19px;
+    margin: 2em 0;
+    
+    
+    border-top: solid 1px #abb3ae;
+    border-bottom: solid 1px #abb3ae;
+}
+.box4 p {
+    margin: 0; 
+    padding: 0;
+}
