@@ -12,7 +12,7 @@ https://docs.google.com/spreadsheets/d/1EtkNoh_beJV_XTyqguOChw8IxfY0O3MBdfDjI4CJ
 　LINE画面から遷移し、カレンダーを開くことで、ごみの日の予定を登録でき、登録時刻なると、LINEからの通知を受け取れます。
 「1週間」「1ヶ月」ボタンを押下することで、ごみの日の予定を確認できます。
 
-# 事前に必要なこと
+# 動作手順
 
 ## ローカルで動作させたい場合
 
